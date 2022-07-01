@@ -1,0 +1,46 @@
+version: "3.9"
+
+services:
+    db:
+        container_name: mariadb
+        build: ./mariadb
+        ports:
+            - 3306:3306
+        env_file:
+            - .env
+        volumes:
+            - mariadb_volume:/var/lib/mysql/
+
+    wordpress:
+        container_name: wordpress
+        depends_on:
+            - db
+        build: ./wordpress
+        env_file:
+            - .env
+        volumes:
+            - wordpress_volume:/var/www/html
+
+    nginx:
+        container_name: nginx
+        build: ./nginx
+        ports:
+            - 443:443
+        volumes:
+            - wordpress_volume:/var/www/html
+        depends_on:
+            - wordpress
+
+volumes:
+    wordpress_volume:
+        driver: local
+        driver_opts:
+            type: none
+            device: /home/julet4/inception/wordpress/data
+            o: bind
+    mariadb_volume:
+        driver: local
+        driver_opts:
+            type: none
+            device: /home/julet4/inception/mariadb/data
+            o: bind
