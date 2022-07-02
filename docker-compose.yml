@@ -38,6 +38,7 @@ volumes:
             type: none
             device: /home/julet4/inception/wordpress/data
             o: bind
+
     mariadb_volume:
         driver: local
         driver_opts:

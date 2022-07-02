@@ -1,11 +1,13 @@
 FROM debian:buster
 
+EXPOSE 3306
+
 RUN apt update -y
 RUN apt install -y mariadb-server
 
-COPY init.sh .
+COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
+COPY conf/init.sql /tmp
 
-EXPOSE 3306
+RUN service mysql start && mysql < /tmp/init.sql
 
-
-CMD ["sh", "init.sh"]
+CMD ["mysqld"]
