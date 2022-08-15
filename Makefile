@@ -7,8 +7,8 @@ stop:
 	docker-compose down
 
 clean: stop
-	sudo rm -rf ./mariadb/data/*
-	sudo rm -rf ./wordpress/data/*
+	sudo rm -rf /home/jumaison/data/mariadb/*
+	sudo rm -rf /home/jumaison/data/wordpress/*
 	if $(VOLUMES)[0] != "\0"; then echo $(VOLUMES); fi
 	docker volume rm $(VOLUMES)
 
