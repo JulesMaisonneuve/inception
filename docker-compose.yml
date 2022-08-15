@@ -39,12 +39,12 @@ volumes:
         driver: local
         driver_opts:
             type: none
-            device: /home/julet4/inception/wordpress/data
+            device: /home/jumaison/data/wordpress
             o: bind
 
     mariadb_volume:
         driver: local
         driver_opts:
             type: none
-            device: /home/julet4/inception/mariadb/data
+            device: /home/jumaison/data/mariadb
             o: bind
