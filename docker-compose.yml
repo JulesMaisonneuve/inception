@@ -10,6 +10,7 @@ services:
             - .env
         volumes:
             - mariadb_volume:/var/lib/mysql/
+        restart: always
 
     wordpress:
         container_name: wordpress
@@ -20,6 +21,7 @@ services:
             - .env
         volumes:
             - wordpress_volume:/var/www/html
+        restart: always
 
     nginx:
         container_name: nginx
@@ -30,6 +32,7 @@ services:
             - wordpress_volume:/var/www/html
         depends_on:
             - wordpress
+        restart: always
 
 volumes:
     wordpress_volume:
