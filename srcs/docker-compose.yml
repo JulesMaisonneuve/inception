@@ -3,9 +3,7 @@ version: "3.9"
 services:
     db:
         container_name: mariadb
-        build: ./mariadb
-        ports:
-            - 3306:3306
+        build: ./requirements/mariadb
         env_file:
             - .env
         volumes:
@@ -16,7 +14,7 @@ services:
         container_name: wordpress
         depends_on:
             - db
-        build: ./wordpress
+        build: ./requirements/wordpress
         env_file:
             - .env
         volumes:
@@ -25,7 +23,7 @@ services:
 
     nginx:
         container_name: nginx
-        build: ./nginx
+        build: ./requirements/nginx
         ports:
             - 443:443
         volumes:
@@ -48,3 +46,7 @@ volumes:
             type: none
             device: /home/jumaison/data/mariadb
             o: bind
+networks:
+    default:
+        external: false
+        name: inception_network
